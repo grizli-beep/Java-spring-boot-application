@@ -17,7 +17,7 @@ pipeline {
                 echo "================ start building image ================"
                 script {
                     try {
-                        sh 'docker rmi springtest'
+                        sh 'docker rmi nikita9355/springtest'
                     } catch (ignored) {
                         sh 'docker build -t nikita9355/springtest .'
                     }
