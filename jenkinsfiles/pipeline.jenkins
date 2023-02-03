@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo "================ start building image ================"
                 sh 'docker rmi springtest'
-                sh 'docker build -t springtest .'
+                sh 'docker build -t nikita9355/springtest .'
             }
         }
         stage("Push Docker image") {
