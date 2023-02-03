@@ -10,6 +10,7 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
     }
+
     stages {
         stage("Build Docker image") {
             steps {
@@ -23,6 +24,16 @@ pipeline {
                 echo "================ start push image. Needed install Docker Pipeline ================"
                 withDockerRegistry(credentialsId: 'dockerhub-cred-nikita9355', url: 'https://index.docker.io/v1/') {
                     sh 'docker push nikita9355/springtest'
+                }
+            }
+        }
+        stage("Deployment in k8s") {
+            steps{
+                echo "================ start deployment ================"
+                try {
+                    sh 'kubectl apply -f .'
+                }catch(ignored) {
+                    sh 'kubectl create -f .'
                 }
             }
         }
