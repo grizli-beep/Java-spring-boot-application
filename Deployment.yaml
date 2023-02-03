@@ -20,4 +20,4 @@ spec:
         - name: springtest
           image: "nikita9355/springtest:latest"
           ports:
-            - containerPort: 5000
+            - containerPort: 80
