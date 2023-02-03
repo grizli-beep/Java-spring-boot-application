@@ -20,7 +20,7 @@ pipeline {
         }
         stage("Push Docker image") {
             steps {
-                echo "================ start push image ================"
+                echo "================ start push image. Needed install Docker Pipeline ================"
                 withDockerRegistry(credentialsId: 'dockerhub-cred-nikita9355', url: 'https://index.docker.io/v1/') {
                     sh 'docker push springtest:latest'
                 }
