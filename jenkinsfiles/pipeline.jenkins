@@ -35,11 +35,13 @@ pipeline {
         stage("Deployment in k8s") {
             steps{
                 echo "================ start deployment ================"
-                script {
-                    try {
-                        sh 'kubectl apply -f .'
-                    }catch(ignored) {
-                        sh 'kubectl create -f .'
+                sshagent(['k8s']) {
+                    script {
+                        try {
+                            sh 'kubectl apply -f .'
+                        }catch(ignored) {
+                            sh 'kubectl create -f .'
+                        }
                     }
                 }
             }
