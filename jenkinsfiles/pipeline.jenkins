@@ -5,7 +5,7 @@ properties([disableConcurrentBuilds()])
 pipeline {
     agent {
         label 'MasterNode'
-        }
+    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -15,8 +15,13 @@ pipeline {
         stage("Build Docker image") {
             steps {
                 echo "================ start building image ================"
-                sh 'docker rmi springtest'
-                sh 'docker build -t nikita9355/springtest .'
+                script {
+                    try {
+                        sh 'docker rmi springtest'
+                    } catch (ignored) {
+                        sh 'docker build -t nikita9355/springtest .'
+                    }
+                }
             }
         }
         stage("Push Docker image") {
