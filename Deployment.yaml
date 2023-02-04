@@ -20,7 +20,7 @@ spec:
         - name: springtest
           image: "nikita9355/springtest:latest"
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
 
 ---
 kind: Service
@@ -37,7 +37,7 @@ spec:
     - name      : app-listener
       protocol  : TCP
       port      : 80
-      targetPort: 8000 # Port on Pod
+      targetPort: 8080 # Port on Pod
 
 ---
 apiVersion: networking.k8s.io/v1
@@ -56,4 +56,3 @@ spec:
               name: springtest-service
               port:
                 number: 80
-
