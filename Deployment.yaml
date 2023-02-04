@@ -47,7 +47,7 @@ metadata:
 
 spec:
   rules:
-  - host: www.spring-testSber.net
+  - host: www.spring-testsber.net
     http:
       paths:
         - path: /
