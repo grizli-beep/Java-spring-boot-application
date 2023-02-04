@@ -23,8 +23,8 @@ spec:
             - containerPort: 80
 
 ---
-apiVersion: apps/v1
 kind: Service
+apiVersion: apps/v1
 metadata:
   name: springtest-service
   labels:
