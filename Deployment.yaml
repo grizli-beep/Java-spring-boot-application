@@ -5,16 +5,16 @@ metadata:
   name: springtest
   namespace: default
   labels:
-    project: springtest
+    app: springtest
 spec:
   replicas: 1
   selector:
     matchLabels:
-      project: springtest
+      app: springtest
   template:
     metadata:
       labels:
-        project: springtest
+        app: springtest
     spec:
       containers:
         - name: springtest
@@ -32,7 +32,7 @@ spec:
 #    owner: BykovNV
 #spec:
 #  selector:
-#    project: springtest
+#    app: springtest
 #  ports:
 #    - name      : app-listener
 #      protocol  : TCP
