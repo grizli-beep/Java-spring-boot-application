@@ -50,7 +50,11 @@ spec:
   - host: www.spring-testSber.net
     http:
       paths:
-        - backend:
-            serviceName: springtest-service
-            servicePort: 80
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: springtest-service
+              port:
+                number: 80
 
