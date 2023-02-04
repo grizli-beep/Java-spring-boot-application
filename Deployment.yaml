@@ -49,7 +49,7 @@ spec:
   - host: www.spring-testsber.net
     http:
       paths:
-        - path: /actuator/prometheus
+        - path: /
           pathType: Prefix
           backend:
             service:
