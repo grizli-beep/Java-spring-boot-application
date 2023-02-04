@@ -20,7 +20,7 @@ spec:
         - name: springtest
           image: "nikita9355/springtest:latest"
           ports:
-            - containerPort: 80
+            - containerPort: 8080
 
 ---
 kind: Service
@@ -37,14 +37,13 @@ spec:
     - name      : app-listener
       protocol  : TCP
       port      : 80
-      targetPort: 80 # Port on Pod
+      targetPort: 8080 # Port on Pod
 
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-hosts
-
 spec:
   rules:
   - host: www.spring-testsber.net
