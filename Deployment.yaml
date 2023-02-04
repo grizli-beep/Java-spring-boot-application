@@ -5,19 +5,38 @@ metadata:
   name: springtest
   namespace: default
   labels:
-    app: springtest
+    project: springtest
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: springtest
+      project: springtest
   template:
     metadata:
       labels:
-        app: springtest
+        project: springtest
     spec:
       containers:
         - name: springtest
           image: "nikita9355/springtest:latest"
           ports:
             - containerPort: 80
+
+---
+kind: Service
+apiVersion: apps/v1
+metadata:
+  name: springtest-service
+  namespace: default
+  labels:
+    project: springtest-service
+spec:
+  selector:
+    project: springtest
+  ports:
+    - name      : app-listener
+      protocol  : TCP
+      port      : 80 # Port on Load Balancer
+      targetPort: 80 # Port on Pod
+  type: LoadBalancer
+
