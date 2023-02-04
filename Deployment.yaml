@@ -38,6 +38,7 @@ spec:
       protocol  : TCP
       port      : 80
       targetPort: 80 # Port on Pod
+  type: NodePort
 
 ---
 apiVersion: networking.k8s.io/v1
