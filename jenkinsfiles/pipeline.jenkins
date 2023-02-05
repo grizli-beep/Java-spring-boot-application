@@ -42,5 +42,19 @@ pipeline {
                 }
             }
         }
+        stage("Deployment-prom in k8s") {
+            steps{
+                echo "================ start deployment ================"
+                withKubeConfig([credentialsId: 'configkuber']) {
+                    script {
+                        try {
+                            sh 'kubectl apply -f Deployment-Prom.yaml'
+                        }catch(ignored) {
+                            sh 'kubectl create -f Deployment-Prom.yaml'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
