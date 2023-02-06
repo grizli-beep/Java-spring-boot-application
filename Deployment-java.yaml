@@ -15,12 +15,26 @@ spec:
     metadata:
       labels:
         app: springtest
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/actuator/prometheus"
     spec:
       containers:
         - name: springtest
           image: "nikita9355/springtest:latest"
           ports:
             - containerPort: 8080
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /-/ready
+        port: 8080
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 4
 
 ---
 kind: Service
@@ -35,7 +49,7 @@ spec:
     app: springtest
   ports:
     - name      : app-listener
-      nodePort  : 30036
+      nodePort  : 30030
       protocol  : TCP
       port      : 80
       targetPort: 8080 # Port on Pod
