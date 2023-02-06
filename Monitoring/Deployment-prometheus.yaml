@@ -29,8 +29,6 @@ spec:
     type: Recreate
   template:
     metadata:
-      annotations:
-        kubectl.kubernetes.io/restartedAt: "2023-02-05T16:45:53+03:00"
       creationTimestamp: null
       labels:
         app: prometheus
@@ -114,22 +112,43 @@ spec:
         - name: storage-volume
           persistentVolumeClaim:
             claimName: prometheus-server
-status:
-  availableReplicas: 1
-  conditions:
-    - lastTransitionTime: "2023-02-05T13:59:33Z"
-      lastUpdateTime: "2023-02-05T14:00:09Z"
-      message: ReplicaSet "prometheus-server-6488cdb55d" has successfully progress                                                                                                                                                             ed.
-      reason: NewReplicaSetAvailable
-      status: "True"
-      type: Progressing
-    - lastTransitionTime: "2023-02-06T08:58:28Z"
-      lastUpdateTime: "2023-02-06T08:58:28Z"
-      message: Deployment has minimum availability.
-      reason: MinimumReplicasAvailable
-      status: "True"
-      type: Available
-  observedGeneration: 2
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: prometheus
+    meta.helm.sh/release-namespace: default
+  labels:
+    app: prometheus
+    app.kubernetes.io/managed-by: Helm
+    chart: prometheus-19.3.3
+    component: server
+    heritage: Helm
+    release: prometheus
+  name: prometheus-server
+  namespace: default
+  resourceVersion: "58301"
+  uid: b31bda04-8bba-435a-b375-3fd1a99a6e0f
+spec:
+  clusterIP: 10.97.176.152
+  clusterIPs:
+    - 10.97.176.152
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http
+      nodePort: 30020
+      port: 80
+      protocol: TCP
+      targetPort: 9090
+  selector:
+    app: prometheus
+    component: server
+    release: prometheus
+  sessionAffinity: None
+  type: NodePort
