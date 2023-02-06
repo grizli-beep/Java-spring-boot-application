@@ -129,8 +129,6 @@ metadata:
     release: prometheus
   name: prometheus-server
   namespace: default
-  resourceVersion: "58301"
-  uid: b31bda04-8bba-435a-b375-3fd1a99a6e0f
 spec:
   clusterIP: 10.97.176.152
   clusterIPs:
