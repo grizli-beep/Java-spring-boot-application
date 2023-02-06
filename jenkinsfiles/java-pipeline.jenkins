@@ -34,9 +34,9 @@ pipeline {
                 withKubeConfig([credentialsId: 'configkuber']) {
                     script {
                         try {
-                            sh 'kubectl apply -f .'
+                            dir('Deployment') {sh 'kubectl apply -f Deployment-java.yaml'}
                         }catch(ignored) {
-                            sh 'kubectl create -f .'
+                            dir('Deployment') {sh 'kubectl create -f Deployment-java.yaml'}
                         }
                     }
                 }

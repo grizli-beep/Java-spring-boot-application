@@ -1,0 +1,30 @@
+#!groovy
+// Check ub1 properties
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+        label 'MasterNode'
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+
+    stages {
+        stage("Deployment in k8s") {
+            steps{
+                echo "================ start deployment ================"
+                withKubeConfig([credentialsId: 'configkuber']) {
+                    script {
+                        try {
+                            dir('Deployment') {sh 'kubectl apply -f Deployment-grafana.yaml'}
+                        }catch(ignored) {
+                            dir('Deployment') {sh 'kubectl create -f Deployment-grafana.yaml'}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

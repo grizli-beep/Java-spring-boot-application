@@ -18,9 +18,9 @@ pipeline {
                 withKubeConfig([credentialsId: 'configkuber']) {
                     script {
                         try {
-                            dir('Monitoring') {sh 'kubectl apply -f Deployment-prometheus.yaml'}
+                            dir('Deployment') {sh 'kubectl apply -f Deployment-prometheus.yaml'}
                         }catch(ignored) {
-                            dir('Monitoring') {sh 'kubectl create -f Deployment-prometheus.yaml'}
+                            dir('Deployment') {sh 'kubectl create -f Deployment-prometheus.yaml'}
                         }
                     }
                 }
