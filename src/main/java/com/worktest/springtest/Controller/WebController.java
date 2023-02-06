@@ -10,6 +10,6 @@ public class WebController {
 
     @GetMapping("/")
     public ResponseEntity<String> getMessage() {
-        return new ResponseEntity<>("Hello Alexey, it's Nikita", HttpStatus.OK);
+        return new ResponseEntity<>("HUIHUIHUIHUI", HttpStatus.OK);
     }
 }
