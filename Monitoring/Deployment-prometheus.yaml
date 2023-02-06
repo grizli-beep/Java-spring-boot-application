@@ -142,7 +142,8 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
     - name: http
-      nodePort: 30020
+#      nodePort: 30020
+      nodePort: 30060
       port: 80
       protocol: TCP
       targetPort: 9090
