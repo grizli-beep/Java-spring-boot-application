@@ -56,13 +56,13 @@ spec:
   type: NodePort
 
 ---
-apiVersion: networking.k8s.io/v1
 kind: Ingress
+apiVersion: networking.k8s.io/v1
 metadata:
-  name: ingress-hosts
+  name: ingress-java-app
 spec:
   rules:
-  - host: www.spring-testsber.net
+  - host: www.java-app.net
     http:
       paths:
         - path: /
