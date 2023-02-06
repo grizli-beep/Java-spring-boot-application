@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo "================ start building image ================"
                 script {
-                        sh 'docker rmi image -t nikita9355/springtest:latest'
+                        sh 'docker rmi image nikita9355/springtest:latest'
                         sh 'docker build -t nikita9355/springtest:latest .'
                 }
             }
