@@ -30,6 +30,16 @@ spec:
           image: "nikita9355/springtest:latest"
           ports:
             - containerPort: 8080
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /-/ready
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
 
 ---
 kind: Service
