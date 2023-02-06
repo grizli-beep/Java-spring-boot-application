@@ -33,8 +33,8 @@ spec:
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: 192.168.49.2
-              port: 30030
+              path: /
+              port: 8080
               scheme: HTTP
             initialDelaySeconds: 30
             periodSeconds: 5
